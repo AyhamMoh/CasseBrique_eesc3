@@ -97,6 +97,7 @@ public class CasseBrique extends Canvas {
                 balle.deplacer();
                 balle.dessiner(dessin);
                 balle.testCollisition(largeurEcran,hauteurgeurEcran);
+                balle.dessinerPoints(dessin);
             }
 
 

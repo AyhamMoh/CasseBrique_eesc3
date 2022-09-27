@@ -13,7 +13,7 @@ public class Balle {
     protected int decalageReflet;
     protected Color colour;
 
-    protected ArrayList<Balle> listePoints = new ArrayList<>();
+    protected Balle[] listePoints = new Balle[10];
     protected long indexFrame = 0;
 
     public Balle(int x, int y, int vtisseHorizontal, int vitesseVertical, int diametre, Color colour) {
@@ -47,25 +47,44 @@ public class Balle {
         vitesseVertical*=-1;
     } //attention
 
-    public void dessiner (Graphics2D dessin) {
-        indexFrame++;
-        if (indexFrame %10 ==0 && vitesseVertical != 0 && vitesseHorizontal!=0) {
-            listePoints.add(new Balle(x,y)) ;
 
-        }
+    public void dessiner (Graphics2D dessin) {
 
         dessin.setColor(colour);
         dessin.fillOval(x,y,diametre,diametre);
         dessin.setColor(Color.WHITE);
         dessin.fillOval(x +decalageReflet,y+decalageReflet,diametreReflet,diametreReflet);
 
-
-        for (Balle balle :listePoints
-             ) {
-            balle.dessiner(dessin);
-        }
     }
 
+
+
+    private int indexPoint = 0;
+public void dessinerPoints(Graphics2D dessin){
+    indexFrame++;
+int indexPoint = (int)((indexFrame/10)%10);
+    if (indexFrame %10 ==0 && vitesseVertical != 0 && vitesseHorizontal!=0) {
+        listePoints[indexPoint] = new Balle(x,y);
+        //if (indexFrame >20){listePoints.remove(listePoints.get(0));}
+    }
+    if(indexFrame<=100){
+        listePoints[indexPoint] = new Balle(x,y);
+    } else{
+        listePoints[indexPoint].setX(x);
+        listePoints[indexPoint].setY(y);
+    }
+    //indexPoint++;
+    //if (indexPoint==10){
+    //    indexFrame=0;
+   // }
+
+    for (Balle point :listePoints
+    ) {
+        if (point != null) {
+            point.dessiner(dessin);
+        }
+    }
+}
 
     public void testCollisition (int largeurEcran, int hauteurgeurEcran){
         if (x<0 ||x>largeurEcran -diametre) {
@@ -136,14 +155,14 @@ public class Balle {
     public void setColour(Color colour) {
         this.colour = colour;
     }
-
+/*
     public ArrayList<Balle> getListePoints() {
         return listePoints;
     }
 
     public void setListePoints(ArrayList<Balle> listePoints) {
         this.listePoints = listePoints;
-    }
+    }*/
 
 
 
