@@ -51,12 +51,15 @@ public class Balle {
         indexFrame++;
         if (indexFrame %10 ==0 && vitesseVertical != 0 && vitesseHorizontal!=0) {
             listePoints.add(new Balle(x,y)) ;
+
         }
 
         dessin.setColor(colour);
         dessin.fillOval(x,y,diametre,diametre);
         dessin.setColor(Color.WHITE);
         dessin.fillOval(x +decalageReflet,y+decalageReflet,diametreReflet,diametreReflet);
+
+
         for (Balle balle :listePoints
              ) {
             balle.dessiner(dessin);
